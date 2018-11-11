@@ -1,0 +1,11 @@
+1)
+SELECT transactionID FROM transactions, bars
+
+WHERE transactions.time < bars.openingTime AND transactions.time>bars.closingTime
+
+2) 
+SELECT state FROM frequents, drinkers
+
+WHERE frequents <> drinkers.state
+
+3)
