@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="../css/styles.css" type="text/css"/>
+	<link rel="stylesheet" href="../css/bootstrap.css" type="text/css"/>
+	<script type="text/javascript" src="../js/Chart.min.js"></script>
+	<title>Bar Beer Drinker Plus - Jim Tang</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Bar Beer Drinker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        	<ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../bars">Bars</a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../beers">Beers</a>
+	            </li>
+	            <li class="nav-item active">
+	            	<a class="nav-link" href="../drinkers">Drinkers<span class="sr-only">(current)</span></a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../modifications">Modifications</a>
+	            </li>
+        	</ul>
+        </div>
+      </div>
+    </nav>
+	
+	<h1><%=name%></h1>
+	<div class = "container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Drinker</th>
+					<th>Bar</th>
+					<th>Beer Ordered</th>
+					<th>Price</th>
+					<th>Time</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% drinkerTrans.forEach(function (table) { %>
+				<tr>
+					<td><%= table.drinkerName %></td>
+					<td><%= table.barName %></td>
+					<td><%= table.beerOrdered %></td>
+					<td><%= table.price %></td>
+					<td><%= table.time %></td>
+					<td><%= table.date %></td>
+				</tr>
+			<% }) %>
+			</tbody>
+		</table>
+	</div>
+
+	<canvas class = "container" id='chart1'>
+		<script>
+			var beerOrdered = [];
+			var numOrdered = [];
+			var i = 0;
+		
+			<% for (var i=0; i < topBeers.length && i < 5; i++) { %>
+				beerOrdered[i] = '<%= topBeers[i].beerOrdered %>';
+				numOrdered[i] = <%= topBeers[i].numOrdered %>;
+				i++;
+			<% } %>	
+
+			let c1 = document.getElementById('chart1').getContext("2d");
+			let topBeersBar = new Chart(c1, {
+				type:'bar',
+				data: {
+					labels: beerOrdered,
+					datasets:[{
+						label: 'Number Purchased',
+						data: numOrdered
+					}]
+				},
+				options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        },
+			        title: {
+			            display: true,
+			            text: 'Most Ordered Beers'
+			        }
+			    }
+			});
+			topBeersBar.render();
+		</script>
+	</canvas>
+
+	<canvas class = "container" id='chart2'>
+		<script>
+			var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+			var sum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var i = 0;
+		
+			<% for (var i=0; i < daySum.length; i++) { %>
+				sum[<%= daySum[i].day %>] = <%= daySum[i].total %>;
+			<% } %>
+
+			let c2 = document.getElementById('chart2').getContext("2d");
+			let topDaysBar = new Chart(c2, {
+				type:'bar',
+				data: {
+					labels: days,
+
+					datasets:[{
+						label: 'Dollars Spent',
+						data: sum
+					}]
+				},
+				options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        },
+			        title: {
+			            display: true,
+			            text: 'Total Dollars Spent at Bars Per Day of Each Month'
+			        }
+			    }
+			});
+			topDaysBar.render();
+		</script>
+	</canvas>
+
+	<canvas class = "container" id='chart3'>
+		<script>
+			var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+			var sum = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var i = 0;
+		
+			<% for (var i=0; i < monthSum.length; i++) { %>
+				sum[<%= monthSum[i].month %>] = <%= monthSum[i].total %>;
+			<% } %>
+
+			let c3 = document.getElementById('chart3').getContext("2d");
+			let topMonthsBar = new Chart(c3, {
+				type:'bar',
+				data: {
+					labels: months,
+
+					datasets:[{
+						label: 'Dollars Spent',
+						data: sum
+					}]
+				},
+				options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        },
+			        title: {
+			            display: true,
+			            text: 'Total Money Spent Per Month'
+			        }
+			    }
+			});
+			topMonthsBar.render();
+		</script>
+	</canvas>
+	
+	<canvas class = "container" id='chart4'>
+		<script>
+			var days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+			var sum = [0,0,0,0,0,0,0];
+		
+			<% for (var i=0; i < dowSum.length; i++) { %>
+				sum[<%= dowSum[i].day %>] = <%= dowSum[i].total %>;
+			<% } %>
+
+			let c4 = document.getElementById('chart4').getContext("2d");
+			let topDowBar = new Chart(c4, {
+				type:'bar',
+				data: {
+					labels: days,
+
+					datasets:[{
+						label: 'Dollars Spent',
+						data: sum
+					}]
+				},
+				options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        },
+			        title: {
+			            display: true,
+			            text: 'Total Money Spent per Day of the Week'
+			        }
+			    }
+			});
+			topDowbar.render();
+		</script>
+	</canvas>
+</body>
+
+</html>

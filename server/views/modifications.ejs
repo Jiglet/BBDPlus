@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
+	<title>Bar Beer Drinker Plus - Jim Tang</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Bar Beer Drinker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        	<ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../bars">Bars</a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../beers">Beers</a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="../drinkers">Drinkers</a>
+	            </li>
+	            <li class="nav-item active">
+	            	<a class="nav-link" href="#">Modifications<span class="sr-only">(current)</span></a>
+	            </li>
+        	</ul>
+        </div>
+      </div>
+    </nav>
+	
+	<h1>Modifications</h1>
+
+	<div class = "container modificationForm form-group">
+		<h2>Bars</h2>
+		<form action="/barMod" method="post">
+			<label for="name">Bar Name:</label>
+			<input class="form-control" type="text" name="name">
+			<label for="state">State:</label>
+			<input class="form-control" type="text" name="state">
+			<label for="openTime">Open Time:</label>
+			<input class="form-control" type="text" name="openTime">
+			<label for="closeTime">Close Time:</label>
+			<input class="form-control" type="text" name="closeTime">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+
+	<div class = "container modificationForm form-group">
+		<form action="/beerMod" method="post">
+			<h2>Beers</h2>
+			<label for="beerName">Beer Name:</label>
+			<input class="form-control" type="text" name="beerName">
+			<label for="manf">Manufacturer:</label>
+			<input class="form-control" type="text" name="manf">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+
+	<div class = "container modificationForm form-group">
+		<h2>Drinkers</h2>
+		<form action="/drinkerMod" method="post">
+			<label for="firstName">ID:</label>
+			<input class="form-control" type="text" name="id">
+			<label for="firstName">First Name:</label>
+			<input class="form-control" type="text" name="first">
+			<label for="lastName">Last Name:</label>
+			<input class="form-control" type="text" name="last">
+			<label for="age">Age:</label>
+			<input class="form-control" type="text" name="age">
+			<label for="state">State:</label>
+			<input class="form-control" type="text" name="state">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+
+	<div class = "container modificationForm form-group">
+		<h2>Frequents</h2>
+		<form action="/freqMod" method="post">
+			<label for="drinkerName">Freq ID:</label>
+			<input class="form-control" type="text" name="freqID">
+			<label for="drinkerName">DrinkerID:</label>
+			<input class="form-control" type="text" name="drinkerID">
+			<label for="drinkerName">Drinker Name:</label>
+			<input class="form-control" type="text" name="drinkerName">
+			<label for="barName">Bar Name:</label>
+			<input class="form-control" type="text" name="barName">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+
+	<div class = "container modificationForm form-group">
+		<h2>Sells</h2>
+		<form action="/sellMod" method="post">
+			<label for="barName">Bar Name:</label>
+			<input class="form-control" type="text" name="barName">
+			<label for="beerSold">Beer Sold:</label>
+			<input class="form-control" type="text" name="beerSold">
+			<label for="price">Price:</label>
+			<input class="form-control" type="text" name="price">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+
+	<div class = "container modificationForm form-group">
+		<h2>Transactions</h2>
+		<form action="/transMod" method="post">
+			<label for="transID">Transaction ID:</label>
+			<input class="form-control" type="text" name="transID">
+			<label for="drinkerName">Drinker Name:</label>
+			<input class="form-control" type="text" name="drinkerName">
+			<label for="barName">Bar Name:</label>
+			<input class="form-control" type="text" name="barName">
+			<label for="time">Time:</label>
+			<input class="form-control" type="text" name="time">
+			<label for="date">Date:</label>
+			<input class="form-control" type="text" name="date">
+			<label for="beerOrdered">Beer Ordered:</label>
+			<input class="form-control" type="text" name="beerOrdered">
+			<label for="price">Price:</label>
+			<input class="form-control" type="text" name="price">
+			<input type="submit" class="btn btn-primary" value="add" name="command">
+			<input type="submit" class="btn btn-primary" value="delete" name="command">
+			<input type="submit" class="btn btn-primary" value="update" name="command">
+		</form>
+	</div>
+	
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<title>Bar Beer Drinker Plus - Jim Tang</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Bar Beer Drinker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        	<ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	            	<a class="nav-link" href="bars">Bars</a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="beers">Beers</a>
+	            </li>
+	            <li class="nav-item active">
+	            	<a class="nav-link" href="#">Drinkers<span class="sr-only">(current)</span></a>
+	            </li>
+	            <li class="nav-item">
+	            	<a class="nav-link" href="modifications">Modifications</a>
+	            </li>
+        	</ul>
+        </div>
+      </div>
+    </nav>
+	
+	<h1>Drinkers</h1>
+	<div class = "container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Drinker</th>
+					<th>Age</th>
+					<th>State</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% print.forEach(function (drinker) { %>
+				<tr>
+					<td><%= drinker.id %></td>
+					<td><a href="/drinkers/<%=drinker.first + ' ' + drinker.last%>"><%= drinker.first + ' ' + drinker.last %></a></td>
+					<td><%= drinker.age %></td>
+					<td><%= drinker.state %></td>
+				</tr>
+			<% }) %>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
